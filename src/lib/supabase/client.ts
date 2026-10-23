@@ -1,8 +1,21 @@
 import { createBrowserClient } from '@supabase/ssr';
 
-export function createClient() {
-  return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+let client: ReturnType<typeof createBrowserClient> | null = null;
+
+export function getSupabaseBrowserClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!url || !key || url.includes('your-project')) {
+    return null;
+  }
+
+  if (!client) {
+    client = createBrowserClient(url, key);
+  }
+
+  return client;
 }
+
+export const createClient = getSupabaseBrowserClient;
+export default getSupabaseBrowserClient;

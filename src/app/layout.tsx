@@ -6,7 +6,7 @@ import { BottomNav } from '@/components/layout/bottom-nav';
 
 export const metadata: Metadata = {
   title: 'Wopido Captain — Women Driver Portal',
-  description: 'Empowering women drivers across Pune. Drive safely, earn with pride.',
+  description: 'Empowering women drivers across Rourkela. Drive safely, earn with pride.',
   icons: {
     icon: '/favicon.ico',
   },

@@ -88,7 +88,7 @@ export function Sidebar() {
           <span>Verified Captain Network</span>
         </div>
         <p className="text-white/40 text-[11px] leading-tight">
-          Pune Hub • 100% Women Fleet
+          Rourkela Hub • 100% Women Fleet
         </p>
       </div>
     </aside>

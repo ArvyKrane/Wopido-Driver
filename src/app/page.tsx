@@ -66,7 +66,7 @@ export default function DriverDashboardPage() {
               <span>•</span>
               <span className="text-emerald-700 font-bold flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                Pune City Hub
+                Rourkela City Hub
               </span>
             </p>
           </div>
@@ -76,7 +76,7 @@ export default function DriverDashboardPage() {
             {isDemoMode && (
               <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-xs font-bold text-amber-800">
                 <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                <span>Pune Simulation Live</span>
+                <span>Rourkela Simulation Live</span>
               </div>
             )}
 
@@ -99,7 +99,7 @@ export default function DriverDashboardPage() {
             <div>
               <p className="text-sm font-bold text-amber-950">You are currently Offline</p>
               <p className="text-xs text-amber-800/80 mt-0.5">
-                Switch your status to Online to begin receiving ride requests from verified women passengers across Pune.
+                Switch your status to Online to begin receiving ride requests from verified women passengers across Rourkela.
               </p>
             </div>
           </div>
@@ -151,7 +151,7 @@ export default function DriverDashboardPage() {
               </div>
               <div className="space-y-1">
                 <p className="text-base font-bold text-foreground">
-                  Scanning for Nearby Women Riders...
+                  Scanning for Nearby Women Riders in Rourkela...
                 </p>
                 <p className="text-xs text-muted-foreground max-w-md mx-auto">
                   You are live on the radar. When a passenger books nearby, you’ll receive an instant 30-second priority alert right here.
@@ -192,7 +192,7 @@ export default function DriverDashboardPage() {
           label="Captain Rating"
           value={`${driver.rating} ★`}
           icon="star"
-          subtitle="Top 5% in Pune"
+          subtitle="Top 5% in Rourkela"
         />
         <StatsCard
           label="Lifetime Trips"

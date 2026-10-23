@@ -38,7 +38,7 @@ export default function RequestsQueuePage() {
         <Card className="p-8 text-center space-y-4">
           <p className="text-sm font-semibold text-foreground">You are currently Offline</p>
           <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-            You must be online to receive incoming requests from riders in Pune.
+            You must be online to receive incoming requests from riders in Rourkela.
           </p>
           <Button onClick={toggleOnline} className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs">
             Go Online Now

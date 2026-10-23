@@ -13,6 +13,10 @@ export function calculateFare(distanceKm: number, config = PRICING_CONFIG) {
   const subtotal = config.baseFare + extraCharge;
   const platformFee = Math.round(subtotal * config.platformFeePercent * 100) / 10000;
   const total = parseFloat((subtotal + platformFee).toFixed(2));
+  // 3% platform commission, 97% captain earnings
+  const commissionRate = config.platformFeePercent / 100;
+  const driverEarnings = parseFloat((subtotal * (1 - commissionRate)).toFixed(2));
+
   return {
     baseFare: config.baseFare,
     includedDistance: config.includedDistance,
@@ -22,6 +26,6 @@ export function calculateFare(distanceKm: number, config = PRICING_CONFIG) {
     platformFee: parseFloat(platformFee.toFixed(2)),
     total,
     perKmRate: config.perKmRate,
-    driverEarnings: parseFloat((subtotal * 0.85).toFixed(2)),
+    driverEarnings,
   };
 }

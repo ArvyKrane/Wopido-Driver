@@ -52,7 +52,7 @@ export function Receipt({ ride }: ReceiptProps) {
           <span>{formatCurrency(ride.fare)}</span>
         </div>
         <div className="flex justify-between text-muted-foreground">
-          <span>Platform fee (15%)</span>
+          <span>Platform fee (3%)</span>
           <span>- {formatCurrency(platformFee)}</span>
         </div>
         <div className="flex justify-between font-bold text-emerald-600 text-base border-t border-border pt-2">

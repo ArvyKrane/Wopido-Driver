@@ -17,10 +17,10 @@ export function useEarnings(period: EarningsPeriod = 'today') {
 
     const weekRides = rides;
     const weekEarnings = driver.weeklyEarnings;
-    const weekPlatformFees = parseFloat((weekEarnings * 0.15).toFixed(2));
+    const weekPlatformFees = parseFloat((weekEarnings * 0.03).toFixed(2));
 
     const monthEarnings = driver.monthlyEarnings;
-    const monthPlatformFees = parseFloat((monthEarnings * 0.15).toFixed(2));
+    const monthPlatformFees = parseFloat((monthEarnings * 0.03).toFixed(2));
 
     if (period === 'today') {
       return {

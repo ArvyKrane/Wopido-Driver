@@ -166,8 +166,8 @@ export function RequestCard({ request, onAccept, onReject }: RequestCardProps) {
           <span className="font-semibold text-slate-800">{formatCurrency(fare.total)}</span>
         </div>
         <div className="flex justify-between text-slate-500 text-[11px]">
-          <span>Platform Fee (15%)</span>
-          <span className="font-mono">-{formatCurrency(fare.subtotal * 0.15)}</span>
+          <span>Platform Commission (3%)</span>
+          <span className="font-mono">-{formatCurrency(fare.platformFee)}</span>
         </div>
         <div className="flex justify-between font-black text-xs text-emerald-700 pt-1.5 border-t border-slate-200">
           <span>Net Captain Payout</span>

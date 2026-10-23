@@ -1,7 +1,7 @@
 'use client';
 
 import { formatCurrency } from '@/lib/utils';
-import { TrendingUp, TrendingDown, DollarSign } from 'lucide-react';
+import { TrendingDown, TrendingUp } from 'lucide-react';
 
 interface EarningsSummaryProps {
   totalEarnings: number;
@@ -10,31 +10,36 @@ interface EarningsSummaryProps {
   rides: number;
 }
 
-export function EarningsSummary({ totalEarnings, platformFees, netEarnings, rides }: EarningsSummaryProps) {
+export function EarningsSummary({
+  totalEarnings,
+  platformFees,
+  netEarnings,
+  rides,
+}: EarningsSummaryProps) {
   return (
     <div className="grid grid-cols-2 gap-4">
-      <div className="col-span-2 rounded-2xl bg-gradient-to-br from-primary to-[#6B2D94] p-6 text-white">
-        <p className="text-white/70 text-sm font-medium">Total Earnings</p>
-        <p className="text-4xl font-bold mt-1">{formatCurrency(totalEarnings)}</p>
-        <p className="text-white/60 text-xs mt-2">{rides} rides completed</p>
+      <div className="col-span-2 rounded-2xl bg-slate-900 p-6 text-white border border-slate-800 shadow-sm">
+        <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">Total Gross Fare</p>
+        <p className="text-3xl md:text-4xl font-black mt-1 text-white">{formatCurrency(totalEarnings)}</p>
+        <p className="text-amber-400 text-xs mt-2 font-bold">{rides} completed trips</p>
       </div>
 
-      <div className="rounded-xl border border-border bg-card p-4 space-y-1">
-        <div className="flex items-center gap-2 text-muted-foreground text-xs">
-          <TrendingDown className="h-3.5 w-3.5 text-red-500" />
-          Platform Fee
+      <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-1">
+        <div className="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase">
+          <TrendingDown className="h-3.5 w-3.5 text-slate-400" />
+          Platform Commission
         </div>
-        <p className="text-lg font-bold text-red-600">- {formatCurrency(platformFees)}</p>
-        <p className="text-xs text-muted-foreground">15% of subtotal</p>
+        <p className="text-lg font-black text-slate-800">- {formatCurrency(platformFees)}</p>
+        <p className="text-xs text-slate-400 font-medium">3% platform fee</p>
       </div>
 
       <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 space-y-1">
-        <div className="flex items-center gap-2 text-emerald-700 text-xs">
+        <div className="flex items-center gap-2 text-emerald-700 text-xs font-bold uppercase">
           <TrendingUp className="h-3.5 w-3.5" />
-          Net Earnings
+          Captain Net Payout
         </div>
-        <p className="text-lg font-bold text-emerald-700">{formatCurrency(netEarnings)}</p>
-        <p className="text-xs text-emerald-600">Your take-home</p>
+        <p className="text-lg font-black text-emerald-700">{formatCurrency(netEarnings)}</p>
+        <p className="text-xs text-emerald-600 font-semibold">97% take-home earnings</p>
       </div>
     </div>
   );

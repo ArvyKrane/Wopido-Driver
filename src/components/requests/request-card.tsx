@@ -31,7 +31,7 @@ export function RequestCard({ request, onAccept, onReject }: RequestCardProps) {
   const [accepted, setAccepted] = useState(false);
 
   const fare = calculateFare(request.distance);
-  const circumference = 2 * Math.PI * 20; // r=20
+  const circumference = 2 * Math.PI * 18; // r=18
   const strokeDashoffset = circumference - (timeLeft / REQUEST_TIMEOUT_SECONDS) * circumference;
 
   useEffect(() => {
@@ -49,46 +49,44 @@ export function RequestCard({ request, onAccept, onReject }: RequestCardProps) {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-3xl p-5 md:p-6 bg-white/90 backdrop-blur-2xl border-2 border-[#4A1C6A]/20 shadow-[0_12px_36px_rgba(74,28,106,0.08)] space-y-4 transition-all duration-300">
-      {/* Top subtle highlight */}
-      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent" />
-
+    <div className="rounded-2xl p-5 bg-white border border-slate-200 shadow-sm space-y-4">
       {/* Header with Rider & Countdown Timer */}
       <div className="flex items-start justify-between gap-3">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="font-black text-foreground text-lg tracking-tight">
+            <span className="font-black text-slate-900 text-lg">
               {request.riderName}
             </span>
-            <Badge className="bg-emerald-500/15 text-emerald-700 hover:bg-emerald-500/15 border-emerald-500/30 text-[10px] font-bold gap-1 px-2 py-0.5">
+            <Badge className="bg-amber-100 text-amber-900 border-amber-300 text-[10px] font-bold px-2 py-0.5 capitalize">
+              {request.category}
+            </Badge>
+            <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[10px] font-bold gap-1 px-2 py-0.5">
               <Shield className="w-3 h-3 text-emerald-600" />
               Verified Rider
             </Badge>
           </div>
-          <p className="text-xs text-muted-foreground flex items-center gap-1.5 font-medium">
-            <span className="capitalize font-semibold text-primary">{request.category}</span>
-            <span>•</span>
-            <span>Est. {request.duration} mins trip</span>
+          <p className="text-xs text-slate-500 font-medium">
+            Incoming Ride Alert • ~{request.duration} mins trip
           </p>
         </div>
 
         {/* Countdown Ring */}
-        <div className="relative w-12 h-12 shrink-0">
-          <svg className="w-12 h-12 -rotate-90" viewBox="0 0 48 48">
+        <div className="relative w-11 h-11 shrink-0">
+          <svg className="w-11 h-11 -rotate-90" viewBox="0 0 44 44">
             <circle
-              cx="24"
-              cy="24"
-              r="20"
+              cx="22"
+              cy="22"
+              r="18"
               fill="none"
-              stroke="#F1EAF7"
+              stroke="#E2E8F0"
               strokeWidth="3.5"
             />
             <circle
-              cx="24"
-              cy="24"
-              r="20"
+              cx="22"
+              cy="22"
+              r="18"
               fill="none"
-              stroke={timeLeft <= 8 ? '#EF4444' : '#4A1C6A'}
+              stroke={timeLeft <= 8 ? '#EF4444' : '#F59E0B'}
               strokeWidth="3.5"
               strokeDasharray={circumference}
               strokeDashoffset={strokeDashoffset}
@@ -99,7 +97,7 @@ export function RequestCard({ request, onAccept, onReject }: RequestCardProps) {
           <div className="absolute inset-0 flex items-center justify-center">
             <span
               className={`text-xs font-black ${
-                timeLeft <= 8 ? 'text-red-500 animate-pulse' : 'text-[#4A1C6A]'
+                timeLeft <= 8 ? 'text-red-600 animate-pulse' : 'text-slate-900'
               }`}
             >
               {timeLeft}s
@@ -108,32 +106,31 @@ export function RequestCard({ request, onAccept, onReject }: RequestCardProps) {
         </div>
       </div>
 
-      {/* Route Info with Clean Nodes */}
-      <div className="p-3.5 rounded-2xl bg-purple-50/40 border border-purple-100/80 space-y-3">
+      {/* Route Info */}
+      <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
         {/* Pickup */}
         <div className="flex items-start gap-3">
-          <div className="mt-1 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20 shrink-0" />
+          <div className="mt-1 w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-100 shrink-0" />
           <div className="min-w-0 flex-1">
-            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
               Pickup Point
             </p>
-            <p className="text-xs md:text-sm font-semibold text-foreground truncate">
+            <p className="text-xs md:text-sm font-bold text-slate-900 truncate">
               {request.pickup}
             </p>
           </div>
         </div>
 
-        {/* Connector */}
-        <div className="ml-1.5 w-0.5 h-2.5 bg-gradient-to-b from-emerald-500 to-[#E8637A]" />
+        <div className="ml-1.5 w-0.5 h-2 bg-slate-300" />
 
         {/* Destination */}
         <div className="flex items-start gap-3">
-          <div className="mt-1 w-3.5 h-3.5 rounded-full bg-[#E8637A] ring-4 ring-[#E8637A]/20 shrink-0" />
+          <div className="mt-1 w-3 h-3 rounded-full bg-amber-500 ring-4 ring-amber-100 shrink-0" />
           <div className="min-w-0 flex-1">
-            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
-              Destination
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              Destination Drop
             </p>
-            <p className="text-xs md:text-sm font-semibold text-foreground truncate">
+            <p className="text-xs md:text-sm font-bold text-slate-900 truncate">
               {request.destination}
             </p>
           </div>
@@ -142,20 +139,20 @@ export function RequestCard({ request, onAccept, onReject }: RequestCardProps) {
 
       {/* Trip Metric Badges */}
       <div className="grid grid-cols-3 gap-2">
-        <div className="p-2.5 rounded-xl bg-white border border-purple-100/80 text-center">
-          <p className="text-[10px] font-bold text-muted-foreground uppercase">Distance</p>
-          <p className="text-xs md:text-sm font-black text-foreground mt-0.5">
+        <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-center">
+          <p className="text-[10px] font-bold text-slate-400 uppercase">Distance</p>
+          <p className="text-xs md:text-sm font-black text-slate-900 mt-0.5">
             {request.distance} km
           </p>
         </div>
-        <div className="p-2.5 rounded-xl bg-white border border-purple-100/80 text-center">
-          <p className="text-[10px] font-bold text-muted-foreground uppercase">Duration</p>
-          <p className="text-xs md:text-sm font-black text-foreground mt-0.5">
+        <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-center">
+          <p className="text-[10px] font-bold text-slate-400 uppercase">Trip Time</p>
+          <p className="text-xs md:text-sm font-black text-slate-900 mt-0.5">
             {request.duration} min
           </p>
         </div>
-        <div className="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200/80 text-center">
-          <p className="text-[10px] font-black text-emerald-700 uppercase">You Earn</p>
+        <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
+          <p className="text-[10px] font-black text-emerald-800 uppercase">You Earn</p>
           <p className="text-xs md:text-sm font-black text-emerald-700 mt-0.5">
             {formatCurrency(fare.driverEarnings)}
           </p>
@@ -163,27 +160,27 @@ export function RequestCard({ request, onAccept, onReject }: RequestCardProps) {
       </div>
 
       {/* Transparent Earnings Breakdown */}
-      <div className="p-3 rounded-xl bg-muted/40 border border-border/60 text-xs space-y-1.5">
-        <div className="flex justify-between text-muted-foreground text-[11px]">
+      <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1.5">
+        <div className="flex justify-between text-slate-500 text-[11px]">
           <span>Rider Fare Total</span>
-          <span className="font-semibold text-foreground">{formatCurrency(fare.total)}</span>
+          <span className="font-semibold text-slate-800">{formatCurrency(fare.total)}</span>
         </div>
-        <div className="flex justify-between text-muted-foreground text-[11px]">
-          <span>Platform Commission (15%)</span>
+        <div className="flex justify-between text-slate-500 text-[11px]">
+          <span>Platform Fee (15%)</span>
           <span className="font-mono">-{formatCurrency(fare.subtotal * 0.15)}</span>
         </div>
-        <div className="flex justify-between font-black text-xs text-emerald-700 pt-1.5 border-t border-border/80">
-          <span>Net Payout to Captain</span>
+        <div className="flex justify-between font-black text-xs text-emerald-700 pt-1.5 border-t border-slate-200">
+          <span>Net Captain Payout</span>
           <span>{formatCurrency(fare.driverEarnings)}</span>
         </div>
       </div>
 
-      {/* Tactile Claymorphic Actions */}
+      {/* Actions */}
       <div className="grid grid-cols-2 gap-3 pt-1">
         <Button
           variant="outline"
           onClick={() => onReject(request.id)}
-          className="rounded-xl h-11 border-rose-200 text-rose-600 hover:bg-rose-50 font-bold text-xs"
+          className="rounded-xl h-11 border-slate-300 text-slate-700 hover:bg-slate-100 font-bold text-xs"
         >
           <X className="h-4 w-4 mr-1.5" />
           Pass
@@ -192,7 +189,7 @@ export function RequestCard({ request, onAccept, onReject }: RequestCardProps) {
         <Button
           onClick={handleAccept}
           disabled={accepted}
-          className="rounded-xl h-11 clay-btn-success text-white font-black text-xs tracking-wide"
+          className="rounded-xl h-11 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs tracking-wide shadow-sm"
         >
           <Check className="h-4 w-4 mr-1.5" />
           {accepted ? 'Accepting...' : 'Accept Ride'}

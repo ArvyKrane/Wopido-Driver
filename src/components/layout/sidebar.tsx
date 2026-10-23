@@ -11,41 +11,47 @@ import {
   Car,
   HelpCircle,
   ClipboardList,
+  ShieldCheck,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 
 const navItems = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/requests', label: 'Requests', icon: Bell, badge: '1' },
-  { href: '/rides', label: 'Rides', icon: ClipboardList },
-  { href: '/earnings', label: 'Earnings', icon: TrendingUp },
-  { href: '/documents', label: 'Documents', icon: FileText },
-  { href: '/vehicle', label: 'Vehicle', icon: Car },
-  { href: '/profile', label: 'Profile', icon: User },
-  { href: '/help', label: 'Help', icon: HelpCircle },
+  { href: '/requests', label: 'Incoming Requests', icon: Bell, badge: 'Live' },
+  { href: '/rides', label: 'Trip History', icon: ClipboardList },
+  { href: '/earnings', label: 'Earnings & Payouts', icon: TrendingUp },
+  { href: '/documents', label: 'Documents & Verification', icon: FileText },
+  { href: '/vehicle', label: 'Vehicle Details', icon: Car },
+  { href: '/profile', label: 'Captain Profile', icon: User },
+  { href: '/help', label: 'Captain Support', icon: HelpCircle },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-white min-h-screen fixed left-0 top-0 z-30">
-      {/* Logo */}
-      <div className="p-6 border-b border-slate-700">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#4A1C6A] to-[#E8637A] flex items-center justify-center text-white font-bold text-lg">
+    <aside className="hidden lg:flex lg:flex-col w-72 bg-gradient-to-b from-[#1E092B] via-[#160620] to-[#0E0316] text-white min-h-screen fixed left-0 top-0 z-30 border-r border-white/10 shadow-2xl">
+      {/* Brand Header */}
+      <div className="p-6 border-b border-white/10 bg-white/[0.02]">
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#7B3FAB] to-[#E8637A] flex items-center justify-center text-white font-black text-xl shadow-[0_4px_16px_rgba(123,63,171,0.4),inset_0_1px_1px_rgba(255,255,255,0.6)]">
             W
           </div>
           <div>
-            <div className="font-bold text-white text-lg leading-none">Wopido</div>
-            <div className="text-slate-400 text-xs">Driver Partner</div>
+            <div className="flex items-center gap-1.5">
+              <span className="font-black text-white text-lg tracking-tight">Wopido</span>
+              <span className="text-[10px] font-bold bg-[#E8637A] text-white px-1.5 py-0.2 rounded-md">
+                CAPTAIN
+              </span>
+            </div>
+            <p className="text-white/50 text-xs font-medium">Women Driving Women</p>
           </div>
         </div>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-1">
+      <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
@@ -54,28 +60,36 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                'flex items-center gap-3.5 px-3.5 py-3 rounded-2xl text-xs font-bold transition-all duration-200 group',
                 isActive
-                  ? 'bg-[#4A1C6A] text-white'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  ? 'bg-gradient-to-r from-primary to-[#6B2FA0] text-white shadow-[0_6px_18px_rgba(74,28,106,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)] scale-[1.02]'
+                  : 'text-white/60 hover:text-white hover:bg-white/[0.06]'
               )}
             >
-              <Icon className="h-5 w-5 shrink-0" />
+              <Icon className={cn('h-4 w-4 transition-transform group-hover:scale-110', isActive ? 'text-white' : 'text-white/60 group-hover:text-white')} />
               <span>{item.label}</span>
               {item.badge && (
-                <Badge variant="secondary" className="ml-auto text-xs py-0 px-1.5 h-5">
+                <span className={cn(
+                  'ml-auto text-[10px] font-extrabold py-0.5 px-2 rounded-full uppercase tracking-wider',
+                  isActive ? 'bg-white/20 text-white' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                )}>
                   {item.badge}
-                </Badge>
+                </span>
               )}
             </Link>
           );
         })}
       </nav>
 
-      {/* Footer */}
-      <div className="p-4 border-t border-slate-700">
-        <p className="text-slate-500 text-xs text-center">Wopido Driver v1.0</p>
-        <p className="text-slate-600 text-xs text-center mt-1">Women-first ride hailing</p>
+      {/* Verified Shield Footer */}
+      <div className="p-4 m-4 rounded-2xl bg-white/[0.04] border border-white/10 text-center space-y-1.5">
+        <div className="flex items-center justify-center gap-1.5 text-emerald-400 text-xs font-bold">
+          <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <span>Verified Captain Network</span>
+        </div>
+        <p className="text-white/40 text-[11px] leading-tight">
+          Pune Hub • 100% Women Fleet
+        </p>
       </div>
     </aside>
   );

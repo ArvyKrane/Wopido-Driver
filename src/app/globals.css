@@ -32,7 +32,7 @@
     --input: 267 20% 86%;
     --ring: 273 58% 28%;
 
-    --radius: 0.875rem;
+    --radius: 1rem;
   }
 
   .dark {
@@ -70,6 +70,56 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .wopido-gradient {
+    background: linear-gradient(135deg, #4A1C6A 0%, #7B3FAB 50%, #E8637A 100%);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 10px 30px -10px rgba(74, 28, 106, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+  }
+
+  .clay-card {
+    background: linear-gradient(145deg, #ffffff, #faf7fd);
+    border-radius: 1.25rem;
+    box-shadow: 8px 8px 24px rgba(74, 28, 106, 0.06), -6px -6px 20px rgba(255, 255, 255, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(230, 220, 245, 0.6);
+  }
+
+  .clay-btn-primary {
+    background: linear-gradient(135deg, #4A1C6A 0%, #682696 50%, #7B3FAB 100%);
+    box-shadow: 0 8px 20px -4px rgba(74, 28, 106, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .clay-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px -4px rgba(74, 28, 106, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  }
+  .clay-btn-primary:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 12px -2px rgba(74, 28, 106, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .clay-btn-success {
+    background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+    box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .clay-btn-success:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px -4px rgba(16, 185, 129, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  }
+  .clay-btn-success:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 12px -2px rgba(16, 185, 129, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.2);
   }
 }

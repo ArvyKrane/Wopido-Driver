@@ -1,63 +1,53 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Loader2 } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { Loader2, Power } from 'lucide-react';
 
 interface AvailabilityToggleProps {
   isOnline: boolean;
   onToggle: () => void;
   loading?: boolean;
-  isDemoMode?: boolean;
 }
 
-export function AvailabilityToggle({ isOnline, onToggle, loading, isDemoMode }: AvailabilityToggleProps) {
+export function AvailabilityToggle({ isOnline, onToggle, loading }: AvailabilityToggleProps) {
   return (
-    <div className={cn(
-      'rounded-2xl p-6 flex flex-col items-center gap-4 transition-all duration-500',
-      isOnline
-        ? 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-200'
-        : 'bg-gradient-to-br from-slate-200 to-slate-300 text-slate-700'
-    )}>
-      {/* Status indicator */}
-      <div className="relative">
-        <button
-          onClick={onToggle}
-          disabled={loading}
-          aria-label={isOnline ? 'Go Offline' : 'Go Online'}
-          className={cn(
-            'w-24 h-24 rounded-full flex items-center justify-center text-4xl font-bold transition-all duration-300 shadow-inner focus:outline-none focus:ring-4',
-            isOnline
-              ? 'bg-white/20 ring-white/50 hover:bg-white/30'
-              : 'bg-white/50 ring-slate-400/50 hover:bg-white/70'
-          )}
-        >
-          {loading ? (
-            <Loader2 className="h-8 w-8 animate-spin" />
-          ) : (
-            <span className="text-4xl">{isOnline ? '🟢' : '⚫'}</span>
-          )}
-        </button>
+    <button
+      type="button"
+      onClick={onToggle}
+      disabled={loading}
+      aria-label={isOnline ? 'Switch to Offline' : 'Switch to Online'}
+      className={cn(
+        'group relative flex items-center gap-3 px-4 py-2.5 rounded-full transition-all duration-300 font-extrabold text-xs shadow-md active:scale-95',
+        isOnline
+          ? 'bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 text-white shadow-[0_8px_20px_rgba(16,185,129,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)]'
+          : 'bg-white/90 dark:bg-slate-800 text-muted-foreground border-2 border-border shadow-sm hover:border-emerald-500/50 hover:text-foreground'
+      )}
+    >
+      {/* 3D Tactile Orb */}
+      <div className={cn(
+        'relative w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300',
+        isOnline 
+          ? 'bg-white text-emerald-600 shadow-[0_2px_6px_rgba(0,0,0,0.15)]' 
+          : 'bg-muted text-muted-foreground'
+      )}>
+        {loading ? (
+          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+        ) : (
+          <Power className="w-3.5 h-3.5" />
+        )}
         {isOnline && (
-          <span className="absolute inset-0 rounded-full animate-ping bg-white/30 pointer-events-none" />
+          <span className="absolute inset-0 rounded-full animate-ping bg-emerald-400/40 pointer-events-none" />
         )}
       </div>
 
-      {/* Status text */}
-      <div className="text-center">
-        <p className="text-lg font-bold">
-          {isOnline ? 'You are Online' : 'You are Offline'}
-        </p>
-        <p className={cn('text-sm mt-1', isOnline ? 'text-white/80' : 'text-slate-600')}>
-          {isOnline ? 'Accepting rides from nearby riders' : 'Tap to start accepting rides'}
-        </p>
+      <div className="text-left pr-1">
+        <span className="block leading-none font-black tracking-wide">
+          {isOnline ? 'CAPTAIN ONLINE' : 'CAPTAIN OFFLINE'}
+        </span>
+        <span className={cn('text-[10px] font-semibold leading-tight block mt-0.5', isOnline ? 'text-white/80' : 'text-muted-foreground')}>
+          {isOnline ? 'Accepting Live Rides' : 'Tap to Go Online'}
+        </span>
       </div>
-
-      {isDemoMode && (
-        <Badge variant="demo" className="bg-white/20 text-white border-white/30">
-          [DEMO] Local state only
-        </Badge>
-      )}
-    </div>
+    </button>
   );
 }
